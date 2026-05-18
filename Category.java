@@ -1,27 +1,34 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Category implements BookComponent {
+public class Category implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String name;
-    private List<BookComponent> components = new ArrayList<>();
+    private List<Book> books = new ArrayList<>();
 
     public Category(String name) {
         this.name = name;
     }
 
-    public void addComponent(BookComponent component) {
-        components.add(component);
+    public void addBook(Book book) {
+        books.add(book);
     }
 
-    public void removeComponent(BookComponent component) {
-        components.remove(component);
+    public void removeBook(Book book) {
+        books.remove(book);
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
-    public void displayInfo() {
-        System.out.println("Category: " + name);
-        for (BookComponent component : components) {
-            component.displayInfo();
-        }
+    public String toString() {
+        return name;
     }
 }

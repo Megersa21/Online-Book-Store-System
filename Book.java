@@ -1,33 +1,23 @@
-public class Book implements BookComponent, Cloneable {
+import java.io.Serializable;
+
+public class Book implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String title;
     private double price;
-    private String coverImageName;
+    private Category category;
 
-    public Book(String title, double price, String coverImageName) {
+    public Book(String title, double price, Category category) {
         this.title = title;
         this.price = price;
-        this.coverImageName = coverImageName;
+        this.category = category;
     }
 
     public String getTitle() { return title; }
     public double getPrice() { return price; }
-    public String getCoverImageName() { return coverImageName; }
+    public Category getCategory() { return category; }
 
     @Override
-    public void displayInfo() {
-        System.out.println("Book: " + title + " | Price: $" + price);
-        BookCover cover = BookCoverFactory.getCover(coverImageName);
-        cover.display(title);
-    }
-
-    @Override
-    public Book clone() {
-        try {
-            Book cloned = (Book) super.clone();
-            cloned.title = cloned.title + " (Special Edition)";
-            return cloned;
-        } catch (CloneNotSupportedException e) {
-            return null;
-        }
+    public String toString() {
+        return title + " - $" + String.format("%.2f", price);
     }
 }
